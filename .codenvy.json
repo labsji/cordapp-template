@@ -1,0 +1,138 @@
+{
+  "v": "4.0",
+  "name": "cordap-template",
+  "workspace":{
+   "name": "cordapp-tryout",
+   "defaultEnv": "cordapp-template",
+    "environments":[
+      {
+        "name":"cordapp-template",
+        "machineConfigs":[
+          {
+            "limits":{
+              "ram":2000
+            },
+            "name":"ws-machine",
+            "type":"docker",
+            "source":{
+              "content":"FROM codenvy/debian_jdk8\nEXPOSE 10003-10010",
+              "type":"dockerfile"
+            },
+            "dev":true,
+            "servers":[
+            ],
+            "envVariables":{
+            },
+            "links":[
+            ]
+          }
+        ]
+      }
+    ],
+    
+    "projects": [
+      {
+        "links": [],
+        "name": "cordapp-template-M7",
+        "attributes": {
+            "contribute_to_branch": [
+            "release-M7"
+          ]
+        },
+        "path": "/cordapp-template-M7",
+        "problems": [],
+        "mixins": [
+          "pullrequest"
+        ]
+      }
+    ],
+    "commands": [
+      {
+        "commandLine": "mkdir -p /projects/cordapp-template-M7/logs; touch /projects/cordapp-template-M7/logs/controller.log; stdbuf -oL tail -f /projects/cordapp-template-M7/logs/controller.log",
+        "name": "controller",
+        "attributes": {
+          "previewUrl": "http://${server.port.10003}/web/example"
+        },
+        "type": "custom"
+      },
+      {
+        "commandLine": "mkdir -p /projects/cordapp-template-M7/logs; touch /projects/cordapp-template-M7/logs/nodea.log; stdbuf -oL tail -f /projects/cordapp-template-M7/logs/nodea.log",
+        "name": "nodeA",
+        "attributes": {
+          "previewUrl": "http://${server.port.10005}/web/example"
+        },
+        "type": "custom"
+      },
+      {
+        "commandLine": "mkdir -p /projects/cordapp-template-M7/logs; touch /projects/cordapp-template-M7/logs/nodeb.log; stdbuf -oL tail -f /projects/cordapp-template-M7/logs/nodeb.log",
+        "name": "nodeB",
+        "attributes": {
+          "previewUrl": "http://${server.port.10007}/web/example"
+        },
+        "type": "custom"
+      },
+      {
+        "commandLine": "mkdir -p /projects/cordapp-template-M7/logs; touch /projects/cordapp-template-M7/logs/nodec.log; stdbuf -oL tail -f /projects/cordapp-template-M7/logs/nodec.log",
+        "name": "nodeC",
+        "attributes": {
+          "previewUrl": "http://${server.port.10009}/web/example"
+        },
+        "type": "custom"
+      },
+      {
+        "commandLine": "mvn clean install -f ${current.project.path}",
+        "name": "build",
+        "attributes": {},
+        "type": "mvn"
+      },
+      {
+        "commandLine": "cd /projects/cordapp-template-M7; bash ./gradlew deployNodes \n cd /projects/cordapp-template-M7/kotlin/build/nodes/controller \n java -jar corda.jar &> /projects/cordapp-template-M7/logs/controller.log & \n cd /projects/cordapp-template-M7/kotlin/build/nodes/nodea; java -jar corda.jar &> /projects/cordapp-template-M7/logs/nodea.log & \n cd /projects/cordapp-template-M7/kotlin/build/nodes/nodeb \n java -jar corda.jar &> /projects/cordapp-template-M7/logs/nodeb.log & \n cd /projects/cordapp-template-M7/kotlin/build/nodes/nodec \n java -jar corda.jar &> /projects/cordapp-template-M7/logs/nodec.log & \n stdbuf -oL echo Nodes_Started \n wait",
+        "name": "gradle-deployNodes",
+        "attributes": {
+          "previewUrl": ""
+        },
+        "type": "custom"
+      }
+    ],
+    "links": [
+     ]
+  },
+  "ide": {
+    "onProjectsLoaded": {
+      "actions": [
+        {
+          "properties": {
+            "name": "controller"
+          },
+          "id": "runCommand"
+        },
+        {
+          "properties": {
+            "name": "nodeA"
+          },
+          "id": "runCommand"
+        },
+        {
+          "properties": {
+            "name": "nodeB"
+          },
+          "id": "runCommand"
+        },
+        {
+          "properties": {
+            "name": "nodeC"
+          },
+          "id": "runCommand"
+        },
+        {
+          "properties": {
+            "name": "gradle-deployNodes"
+          },
+          "id": "runCommand"
+        }
+
+      ]
+    }
+  }
+  
+}
