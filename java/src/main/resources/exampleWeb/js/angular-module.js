@@ -28,7 +28,8 @@ app.controller('DemoAppController', function($http, $location, $uibModal) {
 
     // We identify the node based on its localhost port.
     const nodePort = $location.port();
-    const apiBaseURL = "http://localhost:" + nodePort + "/api/example/";
+    //const apiBaseURL = "http://localhost:" + nodePort + "/api/example/";
+    const apiBaseURL = window.location.origin + "/api/example/";
     let peers = [];
 
     $http.get(apiBaseURL + "me").then((response) => demoApp.thisNode = response.data.me);
