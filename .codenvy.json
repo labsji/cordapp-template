@@ -37,11 +37,14 @@
         "attributes": {
             "contribute_to_branch": [
             "release-M7"
-          ]
+          ],
+        "tourConfig" : ["https://api.myjson.com/bins/c6cn3"]
+
         },
         "path": "/cordapp-template-M7",
         "problems": [],
         "mixins": [
+          "tour",
           "pullrequest"
         ]
       }
