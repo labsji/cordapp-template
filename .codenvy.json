@@ -100,6 +100,18 @@
   "ide": {
     "onProjectsLoaded": {
       "actions": [
+        {  
+          "properties": {
+            "authenticatedContentUrl"    : "http://media.npr.org/images/picture-show-flickr-promo.jpg",
+            "authenticatedIconUrl"       : "https://placeholdit.imgix.net/~text?txtsize=15&txt=image1&w=120&h=120",
+            "authenticatedTitle"         : "Welcome, John",
+            "authenticatedNotification"  : "We are glad you are back!",
+            "nonAuthenticatedContentUrl" : "http://media.npr.org/images/picture-show-flickr-promo.jpg",
+            "nonAuthenticatedIconUrl"    : "https://placeholdit.imgix.net/~text?txtsize=15&txt=image1&w=120&h=120",
+            "nonAuthenticatedTitle"      : "Welcome, Anonymous"
+          },
+          "id": "openWelcomePage"
+        },
         {
           "properties": {
             "name": "controller"
